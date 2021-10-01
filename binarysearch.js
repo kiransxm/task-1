@@ -1,39 +1,23 @@
-var a = [
-    1,
-    2,
-    4,
-    6,
-    1,
-    100,
-    0,
-    10000,
-    3
-];
+function binary_Search(items, value){
+    var firstIndex  = 0,
+        lastIndex   = items.length - 1,
+        middleIndex = Math.floor((lastIndex + firstIndex)/2);
 
-a.sort(function (a, b) {
-    return a - b;
-});
-
-console.log('a,', a);
-
-function binarySearch(arr, i) {
-    var mid = Math.floor(arr.length / 2);
-    console.log(arr[mid], i);
-
-    if (arr[mid] === i) {
-        console.log('match', arr[mid], i);
-        return arr[mid];
-    } else if (arr[mid] < i && arr.length > 1) {
-        console.log('mid lower', arr[mid], i);
-        binarySearch(arr.splice(mid, Number.MAX_VALUE), i);
-    } else if (arr[mid] > i && arr.length > 1) {
-        console.log('mid higher', arr[mid], i);
-        binarySearch(arr.splice(0, mid), i);
-    } else {
-        console.log('not here', i);
-        return -1;
+    while(items[middleIndex] != value && firstIndex < lastIndex)
+    {
+       if (value < items[middleIndex])
+        {
+            lastIndex = middleIndex - 1;
+        } 
+      else if (value > items[middleIndex])
+        {
+            firstIndex = middleIndex + 1;
+        }
+        middleIndex = Math.floor((lastIndex + firstIndex)/2);
     }
 
+ return (items[middleIndex] != value) ? -1 : middleIndex;
 }
-var result = binarySearch(a, 100);
-console.log(result);
+var items = [1, 2, 3, 4, 5, 7, 8, 9];
+console.log(binary_Search(items, 1));   
+console.log(binary_Search(items, 5));
